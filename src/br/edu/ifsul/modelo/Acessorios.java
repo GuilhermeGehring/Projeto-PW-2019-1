@@ -6,11 +6,16 @@
 package br.edu.ifsul.modelo;
 
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -21,6 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "acessorios")
 public class Acessorios {
+
     @Id
     @SequenceGenerator(name = "seq_acessorio", sequenceName = "seq_acessorio_id",
             allocationSize = 1)
@@ -29,8 +35,17 @@ public class Acessorios {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "grupo",
+            joinColumns
+            = @JoinColumn(name = "acessorio", referencedColumnName = "id", nullable = false),
+            inverseJoinColumns
+            = @JoinColumn(name = "grupo", referencedColumnName = "id", nullable = false)
+    )
+    private Set<Grupo> grupo; //associação bidirecional
+
     public Acessorios() {
-    }       
+    }
 
     public Integer getId() {
         return id;
@@ -72,6 +87,13 @@ public class Acessorios {
         }
         return true;
     }
-    
-    
+
+    public Set<Grupo> getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Set<Grupo> grupo) {
+        this.grupo = grupo;
+    }
+
 }
