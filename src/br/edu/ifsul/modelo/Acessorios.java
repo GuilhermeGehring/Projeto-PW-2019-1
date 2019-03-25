@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "acessorios")
+@NamedQuery(name = "todosAcessoriosOrdemNome", query = "from Acessorios where nome = :nome order by nome asc")
 public class Acessorios {
 
     @Id

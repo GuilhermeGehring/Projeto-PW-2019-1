@@ -44,7 +44,7 @@ public class TesteConsultarNamedQuery {
         //mostrar a consulta sem o parametro
         //instrução HQL (referencia as classes e os seus respectivos atributos)
         List<Acessorios> a = em.createNamedQuery("todosAcessoriosOrdemNome")
-                .setParameter("nome", "bemdificil").getResultList();
+                .setParameter("nome", "motor").getResultList();
 
         if (a != null) {
             System.out.println("Nome: " + a.get(0).getNome());
